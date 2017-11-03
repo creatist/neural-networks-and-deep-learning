@@ -125,6 +125,9 @@ class Network(object):
         for l in xrange(2, self.num_layers):
             z = zs[-l]
             sp = sigmoid_prime(z)
+            """
+            delta 由 公式 BP2: δl=((wl+1)Tδl+1)⊙σ′(zl) 得出
+            """
             delta = np.dot(self.weights[-l+1].transpose(), delta) * sp
             nabla_b[-l] = delta
             nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())
