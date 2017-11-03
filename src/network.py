@@ -77,6 +77,19 @@ class Network(object):
             delta_nabla_b, delta_nabla_w = self.backprop(x, y)
             nabla_b = [nb+dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
             nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
+            
+            """ 根据方程（47）——简写为：ΔC≈∂C/∂w *Δw.  其中 nw 即为∂C/∂w 。
+                只要使 ΔC 为负值，则 网络的总代价C就会减小。
+                下面的代码中 Δw = -(eta/len(mini_batch))*nw = (eta/len(mini_batch))* ∂C/∂w  ~ - ∂C/∂w
+                所以 ΔC≈∂C/∂w *Δw = -(eta/len(mini_batch))* ∂C/∂w * ∂C/∂w  <= 0
+                根据公式（32）或者 BP4 得，∂C/∂w=ain * δout , 当 δout为0，这虽然是我们期望的，实际却达不到；
+                    如果所有的ain = 0 网络的训练就没有了意义, 所以整体上 ain > 0
+                    所以 ∂C/∂w 总是 大于 0
+                所以 ΔC 总是 小于 0 ，以此达到减小消耗的目的。
+                同样对于 Δb, ΔC≈∂C/∂b *Δb = -(eta/len(mini_batch))*nb = -(eta/len(mini_batch)) * ∂C/∂b * ∂C/∂b
+                ∂C/∂b = δ > 0
+                所以  ΔC≈∂C/∂b *Δb < 0
+            """
         self.weights = [w-(eta/len(mini_batch))*nw
                         for w, nw in zip(self.weights, nabla_w)]
         self.biases = [b-(eta/len(mini_batch))*nb
