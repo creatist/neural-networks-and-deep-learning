@@ -42,6 +42,8 @@ class Network(object):
         得到 一个 30 行 784 列 和一个 10 行 30 列的  list 数组
         即， len(self.weights) = 2, len(self.weights[0]) = 30 len(self.weights[0][0])=784
         len(self.weights[1])=10, len(self.weights[1][0])=30
+        就是说 weights[0] 表示第 1 层和第 2 层之间的所有权重，weights[0][0]是第 1 层和第 2 层第一个神经元之间的权重，依次类推.
+        对于每一个神经元的输入权重都是一个784维的行向量，即长度为784的list
         """
         self.weights = [np.random.randn(y, x)
                         for x, y in zip(sizes[:-1], sizes[1:])]
@@ -114,6 +116,9 @@ class Network(object):
         nabla_b = [np.zeros(b.shape) for b in self.biases]
         nabla_w = [np.zeros(w.shape) for w in self.weights]
         # feedforward
+        """
+        输入是 784 行 1 列 的列向量
+        """
         activation = x
         activations = [x] # list to store all the activations, layer by layer
         zs = [] # list to store all the z vectors, layer by layer
@@ -137,10 +142,13 @@ class Network(object):
             z = zs[-l]
             sp = sigmoid_prime(z)
             """
-            delta 由 公式 BP2: δl=((wl+1)Tδl+1)⊙σ′(zl) 得出
+            delta 由 公式 BP2: δl=((wl+1)Tδl+1)⊙σ′(zl) 得出， 和 biases 一样是列向量
             """
             delta = np.dot(self.weights[-l+1].transpose(), delta) * sp
             nabla_b[-l] = delta
+            """
+            nabla_w 是一个多行多列的矩阵，delta是一个列向量，activations[i]也是一个列向量，从向量的运算法则来说需要将activations转置
+            """
             nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())
         return (nabla_b, nabla_w)
 
