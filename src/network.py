@@ -31,7 +31,18 @@ class Network(object):
         ever used in computing the outputs from later layers."""
         self.num_layers = len(sizes)
         self.sizes = sizes
+        
+        """
+        得到一个 30行 1列 和 一个 10行 1列的list 数组
+        即， len(self.biases) = 2, len(self.biases[0]) = 30, len(self.biases[1]) = 1
+        len(self.biases[1])= 10 , len(self.biases[1][0]) = 1
+        """
         self.biases = [np.random.randn(y, 1) for y in sizes[1:]]
+        """
+        得到 一个 30 行 784 列 和一个 10 行 30 列的  list 数组
+        即， len(self.weights) = 2, len(self.weights[0]) = 30 len(self.weights[0][0])=784
+        len(self.weights[1])=10, len(self.weights[1][0])=30
+        """
         self.weights = [np.random.randn(y, x)
                         for x, y in zip(sizes[:-1], sizes[1:])]
 
