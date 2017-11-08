@@ -148,6 +148,7 @@ class Network(object):
             nabla_b[-l] = delta
             """
             nabla_w 是一个多行多列的矩阵，delta是一个列向量，activations[i]也是一个列向量，从向量的运算法则来说需要将activations转置
+            四个基本方程 BP1 ~ BP4并不都是矩阵形式，非矩阵形式的方程运算的时候要根据结果的行数列数 对乘积变量调整顺序或进行转置
             """
             nabla_w[-l] = np.dot(delta, activations[-l-1].transpose())
         return (nabla_b, nabla_w)
