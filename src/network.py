@@ -44,6 +44,7 @@ class Network(object):
         len(self.weights[1])=10, len(self.weights[1][0])=30
         就是说 weights[0] 表示第 1 层和第 2 层之间的所有权重，weights[0][0]是第 1 层和第 2 层第一个神经元之间的权重，依次类推.
         对于每一个神经元的输入权重都是一个784维的行向量，即长度为784的list
+        公式 BP4 中的 Wjk ，j刚好对应行列式的行，k对应行列式的列
         """
         self.weights = [np.random.randn(y, x)
                         for x, y in zip(sizes[:-1], sizes[1:])]
