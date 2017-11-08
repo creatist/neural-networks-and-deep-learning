@@ -119,6 +119,8 @@ class Network(object):
         # feedforward
         """
         输入是 784 行 1 列 的列向量
+        activations 中每一个 list数组的维数是不相同的，其中包含了多个activation,
+        比如第一个activation，即输入 x ,是 784 行 1 列， 第二个 activation 是 30 行 1 列， 第三个是 10 行 1 列 
         """
         activation = x
         activations = [x] # list to store all the activations, layer by layer
