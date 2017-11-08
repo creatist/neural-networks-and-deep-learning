@@ -141,6 +141,13 @@ class Network(object):
         # second-last layer, and so on.  It's a renumbering of the
         # scheme in the book, used here to take advantage of the fact
         # that Python can use negative indices in lists.
+        
+        """
+        这里 num_layers=3, 所以 xrange(2,3) 生成 [2] 
+        上面求出的 delta是倒数第 1 层和倒数第 2 层间的 delta，
+        下面求出的 delta是倒数第 2 层和倒数第 3 层间的 delta ，
+        所以用 weights[-l+1] = weights[1] 即，第 2 层 和第 3 层，倒数第 1 层和倒数第 2 层的 weight 来求
+        """
         for l in xrange(2, self.num_layers):
             z = zs[-l]
             sp = sigmoid_prime(z)
