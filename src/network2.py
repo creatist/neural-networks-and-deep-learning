@@ -263,6 +263,10 @@ class Network(object):
         mnist_loader.load_data_wrapper.
 
         """
+        """
+        np.argmax() 函数用来获取矩阵中最大值的序列号，参考http://www.cnblogs.com/zhouyang209117/p/6512302.html
+        这里是为了获取识别结果
+        """
         if convert:
             results = [(np.argmax(self.feedforward(x)), np.argmax(y))
                        for (x, y) in data]
