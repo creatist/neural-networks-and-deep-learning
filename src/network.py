@@ -74,6 +74,9 @@ class Network(object):
                 for k in xrange(0, n, mini_batch_size)]
             for mini_batch in mini_batches:
                 self.update_mini_batch(mini_batch, eta)
+            """
+            每更新一次权重和偏移量就计算一次识别正确率
+            """
             if test_data:
                 print "Epoch {0}: {1} / {2}".format(
                     j, self.evaluate(test_data), n_test)
@@ -84,7 +87,9 @@ class Network(object):
         """Update the network's weights and biases by applying
         gradient descent using backpropagation to a single mini batch.
         The ``mini_batch`` is a list of tuples ``(x, y)``, and ``eta``
-        is the learning rate."""
+        is the learning rate.
+        每个mini_batch 求一次权重偏导和偏移量偏导的平均值，更新一次权重和偏移量
+        """
         nabla_b = [np.zeros(b.shape) for b in self.biases]
         nabla_w = [np.zeros(w.shape) for w in self.weights]
         for x, y in mini_batch:
