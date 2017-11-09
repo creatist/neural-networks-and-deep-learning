@@ -103,6 +103,7 @@ class Network(object):
                 同样对于 Δb, ΔC≈∂C/∂b *Δb = -(eta/len(mini_batch))*nb = -(eta/len(mini_batch)) * ∂C/∂b * ∂C/∂b
                 ∂C/∂b = δ > 0
                 所以  ΔC≈∂C/∂b *Δb < 0
+                这两个计算公式来源于 2.6节，简单说就是取 Δw = -步长 * ∂C/∂w, 至于为什么除以 len(mini_batch)
             """
         self.weights = [w-(eta/len(mini_batch))*nw
                         for w, nw in zip(self.weights, nabla_w)]
