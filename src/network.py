@@ -88,7 +88,13 @@ class Network(object):
         nabla_b = [np.zeros(b.shape) for b in self.biases]
         nabla_w = [np.zeros(w.shape) for w in self.weights]
         for x, y in mini_batch:
+            """
+            对每个数据进行一次前向传播和反向传播
+            """
             delta_nabla_b, delta_nabla_w = self.backprop(x, y)
+            """
+            将每个训练数据得到的偏导加在一起
+            """
             nabla_b = [nb+dnb for nb, dnb in zip(nabla_b, delta_nabla_b)]
             nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
             
