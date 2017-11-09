@@ -203,7 +203,7 @@ class Network(object):
             nabla_w = [nw+dnw for nw, dnw in zip(nabla_w, delta_nabla_w)]
         
         """
-        下面这两个结果来自公式 (93),(94)
+        下面这两个结果来自 3.2节公式 (93),(94)
         """
         self.weights = [(1-eta*(lmbda/n))*w-(eta/len(mini_batch))*nw
                         for w, nw in zip(self.weights, nabla_w)]
