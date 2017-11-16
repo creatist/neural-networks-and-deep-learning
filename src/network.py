@@ -67,6 +67,9 @@ class Network(object):
         tracking progress, but slows things down substantially."""
         if test_data: n_test = len(test_data)
         n = len(training_data)
+        """
+        epoch 的含义：每一个epoch都要对所有数据重新训练一次。
+        """
         for j in xrange(epochs):
             random.shuffle(training_data)
             mini_batches = [
