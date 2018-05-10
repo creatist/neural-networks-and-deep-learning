@@ -119,7 +119,7 @@ class Network(object):
                 所以  ΔC≈∂C/∂b *Δb < 0
                 这两个计算公式来源于 2.6节，简单说就是取 Δw = -步长 * 偏导, 
                 至于为什么除以 len(mini_batch)，
-                    这里的nabla_w 和 nabla_b是mini_batch中所有输入得到的偏导的和， 所以要除以len(mini_batch)求平均值
+                    这里的nabla_w 和 nabla_b是mini_batch中所有输入得到的权重和及偏置的和， 所以要除以len(mini_batch)求平均值
             """
         self.weights = [w-(eta/len(mini_batch))*nw
                         for w, nw in zip(self.weights, nabla_w)]
