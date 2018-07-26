@@ -108,7 +108,7 @@ class Network(object):
             
             """ 根据方程（47）——简写为：ΔC≈∂C/∂w *Δw.  其中 nw 即为∂C/∂w 。
                 只要使 ΔC 为负值，则 网络的总代价C就会减小。
-                下面的代码中 Δw = -(eta/len(mini_batch))*nw = (eta/len(mini_batch))* ∂C/∂w  ~ - ∂C/∂w
+                下面的代码中 Δw = -(eta/len(mini_batch))*nw = -(eta/len(mini_batch))* ∂C/∂w  ~ - ∂C/∂w
                 所以 ΔC≈∂C/∂w *Δw = -(eta/len(mini_batch))* ∂C/∂w * ∂C/∂w  <= 0
                 根据公式（32）或者 BP4 得，∂C/∂w=ain * δout , 当 δout为0，这虽然是我们期望的，实际却达不到；
                     如果所有的ain = 0 网络的训练就没有了意义, 所以整体上 ain > 0
